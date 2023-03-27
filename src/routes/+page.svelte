@@ -12,7 +12,8 @@
   let teamsOptions = []
   let filter = {
     leaguesIds: [],
-    teamsIds: []
+    teamsIds: [],
+    year: 2023,
   }
 
   let matchesData = []
@@ -20,11 +21,19 @@
   let scores = []
 
   onMount(async () => {
-    leaguesOptions = (await leagues).map((l) => ({ label: l.name, value: l.leagueid }))
+    leaguesOptions = (await leagues(filter.year)).map((l) => ({ label: l.name, value: l.leagueid }))
     teamsOptions = (await teams()).map((t) => ({ label: t.name, value: t.team_id }))
+    matchesData = await matches()
+
+    durations = matchesData.map((m) => m.duration)
+    scores = matchesData.map((m) => m.radiant_score + m.dire_score)
   })
 
   async function updateByLeagues(e) {
+    if (e.detail === undefined) {
+      return
+    }
+
     if (e.detail.type === 'remove') {
       filter.leaguesIds = filter.leaguesIds.filter((id) => id !== e.detail.option.value)
       matchesData = await matches(filter)
@@ -33,12 +42,10 @@
 
     filter.leaguesIds.push(e.detail.option.value)
     matchesData = await matches({ leaguesIds: filter.leaguesIds })
-    teamsOptions = (await teams(filter.leaguesIds)).map((t) => ({ label: t.name, value: t.team_id }))
-
+    teamsOptions = (await teams(filter)).map((t) => ({ label: t.name, value: t.team_id }))
   }
 
   async function updateByTeams(e) {
-    console.log(e.detail)
     if (e.detail.type === 'remove') {
       filter.teamsIds = filter.teamsIds.filter((id) => id !== e.detail.option.value)
       matchesData = await matches(filter)
@@ -47,7 +54,6 @@
 
     filter.teamsIds.push(e.detail.option.value)
     matchesData = await matches(filter)
-
   }
 
   $: {
@@ -57,32 +63,48 @@
 </script>
 
 <main>
-  <h2>Leagues</h2>
+  <div class="filters" style="margin-bottom: 2rem;">
+    {#if leaguesOptions.length}
+      <MultiSelect
+        options={leaguesOptions}
+        on:change={updateByLeagues}
+        placeholder="Select leagues"
+        --sms-options-bg="black"
+        --sms-options-color="orange"
+      />
+    {:else}
+      <p>Loading...</p>
+    {/if}
+    <span style="margin: 0 1rem;">|</span>
+    {#if teamsOptions.length}
+      <MultiSelect
+        options={teamsOptions}
+        on:change={updateByTeams}
+        placeholder="Select Teams"
+        --sms-options-bg="black"
+        --sms-options-color="orange"
+      />
+    {:else}
+      <p>Loading...</p>
+    {/if}
+  </div>
 
-  {#if leaguesOptions.length}
-    <MultiSelect
-      options={leaguesOptions}
-      on:change={updateByLeagues}
-      placeholder="Select leagues"
-    />
-  {:else}
-    <p>Loading...</p>
-  {/if}
-
-  <h2>Teams</h2>
-
-  {#if teamsOptions.length}
-    <MultiSelect
-      options={teamsOptions}
-      on:change={updateByTeams}
-      placeholder="Select Teams"
-    />
-  {:else}
-    <p>Loading...</p>
-  {/if}
+  <h3>Data from:</h3>
+  <p>{filter.leaguesIds}</p>
+  <p>{filter.teamsIds}</p>
 
   <Statics {durations} {scores} />
   <Matches {matchesData} />
 </main>
 
+<style>
+  .filters {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    width: 50%;
+  }
+</style>
 

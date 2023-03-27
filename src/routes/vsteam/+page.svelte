@@ -8,9 +8,7 @@
   let teamsOptions = [];
   let selectedTeams = [];
 
-  let matchesData = [];
-  let durations = [];
-  let scores = [];
+  let matchesData, durations, scores = [];
 
   onMount(async () => {
     teamsOptions = (await teams()).map((t) => ({ label: t.name, value: t.team_id }));

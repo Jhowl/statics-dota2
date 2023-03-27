@@ -5,17 +5,6 @@
   import utils from '$lib/utils/utils'
 
   export let matchesData = []
-    // {
-    //     "duration": 1841,
-    //     "match_id": 7073795445,
-    //     "start_time": 1679579857,
-    //     "dire_score": 12,
-    //     "radiant_score": 23,
-    //     "radiant_name": "HellRaisers",
-    //     "dire_name": "BetBoom Team",
-    //     "league_name": "DPC 2023 EEU Spring Tour Division I - presented by Paragon Events"
-    // }
-
   onMount(async () => {
     matchesData = await matches()
   })
@@ -40,8 +29,13 @@
       <tbody>
         {#each matchesData as match}
           <tr>
-            <td>{match.match_id}</td>
-            <td>{match.duration}</td>
+            <td>
+              {match.match_id}
+              <a href="https://www.dotabuff.com/matches/{match.match_id}" target="_blank">
+                <img src="dotabuff.png" alt="dotabuff" width="15" height="15">
+              </a>
+            </td>
+            <td>{utils.secondsToMinutes(match.duration)}</td>
             <td>{utils.timestampToDate(match.start_time)}</td>
             <td>{match.dire_score}</td>
             <td>{match.radiant_score}</td>
@@ -63,6 +57,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-size: 0.7rem;
   }
 
   table {
@@ -81,7 +76,8 @@
   } */
 
   tr:hover {
-    background-color: #ddd;
+    background-color: #343434;
+    color: #C56400;
   }
 
   th {
