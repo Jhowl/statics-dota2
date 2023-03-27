@@ -57,7 +57,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
   }
 
   table {
@@ -84,7 +84,7 @@
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #4CAF50;
+    background-color: #4caf4f65;
     color: white;
   }
 

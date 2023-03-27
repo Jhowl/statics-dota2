@@ -31,8 +31,6 @@ export const matches = async ({ leaguesIds = [], teamsIds = [], year = '2023' } 
     ORDER BY
       matches.match_id DESC`
 
-  console.log(queryMatches)
-
   try {
     const urlMatches = `${urlBase}${encodeURIComponent(queryMatches)}`
     const matches = await axios.get(urlMatches)

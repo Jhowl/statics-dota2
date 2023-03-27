@@ -64,6 +64,7 @@
 
 <main>
   <div class="filters" style="margin-bottom: 2rem;">
+    <h3>Data from:</h3>
     {#if leaguesOptions.length}
       <MultiSelect
         options={leaguesOptions}
@@ -89,10 +90,6 @@
     {/if}
   </div>
 
-  <h3>Data from:</h3>
-  <p>{filter.leaguesIds}</p>
-  <p>{filter.teamsIds}</p>
-
   <Statics {durations} {scores} />
   <Matches {matchesData} />
 </main>
@@ -102,9 +99,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     font-size: 0.9rem;
     width: 50%;
+    margin: 0 auto;
   }
 </style>
 
