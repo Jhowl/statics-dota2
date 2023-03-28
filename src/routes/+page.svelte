@@ -90,6 +90,8 @@
     {/if}
   </div>
 
+  <h4>Using Total matches: {matchesData.length}</h4>
+
   <Statics {durations} {scores} />
   <Matches {matchesData} />
 </main>

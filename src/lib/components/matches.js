@@ -14,6 +14,7 @@ export const matches = async ({ leaguesIds = [], teamsIds = [], year = '2023' } 
       matches.start_time,
       matches.dire_score,
       matches.radiant_score,
+      matches.radiant_win AS radiant_win,
       teams_radiant.name AS radiant_name,
       teams_dire.name AS dire_name,
       leagues.name AS league_name

@@ -56,20 +56,19 @@
     `
   }
 
-  //create deviation by score 30m = ?% 35m = ?% 40m = ?% 45m = ?% 50m = ?% 55m = ?% 60m = ?% 65m = ?% 70m = ?% 75m = ?% 80m = ?%
   function standardDeviationbyScore(data) {
     const scores = data.reduce((acc, curr) => {
-      acc.thirty = curr < 30 ? acc.thirty + 1 : acc.thirty
-      acc.thirtyFive = curr < 35 ? acc.thirtyFive + 1 : acc.thirtyFive
-      acc.forty = curr < 40 ? acc.forty + 1 : acc.forty
-      acc.fortyFive = curr < 45 ? acc.fortyFive + 1 : acc.fortyFive
-      acc.fifty = curr < 50 ? acc.fifty + 1 : acc.fifty
-      acc.fiftyFive = curr < 55 ? acc.fiftyFive + 1 : acc.fiftyFive
-      acc.sixty = curr < 60 ? acc.sixty + 1 : acc.sixty
-      acc.sixtyFive = curr < 65 ? acc.sixtyFive + 1 : acc.sixtyFive
-      acc.seventy = curr < 70 ? acc.seventy + 1 : acc.seventy
-      acc.seventyFive = curr < 75 ? acc.seventyFive + 1 : acc.seventyFive
-      acc.eighty = curr < 80 ? acc.eighty + 1 : acc.eighty
+      acc.thirty = curr < 30.5 ? acc.thirty + 1 : acc.thirty
+      acc.thirtyFive = curr < 35.5 ? acc.thirtyFive + 1 : acc.thirtyFive
+      acc.forty = curr < 40.5 ? acc.forty + 1 : acc.forty
+      acc.fortyFive = curr < 45.5 ? acc.fortyFive + 1 : acc.fortyFive
+      acc.fifty = curr < 50.5 ? acc.fifty + 1 : acc.fifty
+      acc.fiftyFive = curr < 55.5 ? acc.fiftyFive + 1 : acc.fiftyFive
+      acc.sixty = curr < 60.5 ? acc.sixty + 1 : acc.sixty
+      acc.sixtyFive = curr < 65.5 ? acc.sixtyFive + 1 : acc.sixtyFive
+      acc.seventy = curr < 70.5 ? acc.seventy + 1 : acc.seventy
+      acc.seventyFive = curr < 75.5 ? acc.seventyFive + 1 : acc.seventyFive
+      acc.eighty = curr < 80.5 ? acc.eighty + 1 : acc.eighty
       return acc
     }, {
       thirty: 0,

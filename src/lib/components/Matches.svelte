@@ -21,6 +21,7 @@
           <th>Start Time</th>
           <th>Dire Score</th>
           <th>Radiant Score</th>
+          <th>Winner</th>
           <th>Radiant Name</th>
           <th>Dire Name</th>
           <th>League Name</th>
@@ -39,6 +40,7 @@
             <td>{utils.timestampToDate(match.start_time)}</td>
             <td>{match.dire_score}</td>
             <td>{match.radiant_score}</td>
+            <td>{match.radiant_win ? match.radiant_name : match.dire_name}</td>
             <td>{match.radiant_name}</td>
             <td>{match.dire_name}</td>
             <td>{match.league_name}</td>
@@ -62,8 +64,8 @@
 
   table {
     border-collapse: collapse;
-    width: 100%;
-    max-width: 1200px;
+    width: 67%;
+    /* max-width: 1200px; */
   }
 
   th, td {
